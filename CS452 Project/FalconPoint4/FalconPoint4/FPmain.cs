@@ -14,7 +14,12 @@ namespace FalconPoint4
 
     public class FPmain : ILayerEditor3, ICallback
     {
-        
+        public enum Display {MPH = 0, Bearing = 1, None = 2, Both = 3};
+        public Display DisplayChoice = Display.Both;
+        public bool AlreadyCreatedRightClick = false;
+
+        public string displayText = "FalconPoint Display\\MPH\nViewMPH\nFalconPoint Display\\Bearing\nViewBearing\nFalconPoint Display\\None\nViewNone\nFalconPoint Display\\Both\nViewBoth";
+
         #region // Ilayer editor 3
 
         public void CanAddPixmapsToBaseMap(out int bCanAddPixmapsToBaseMap)
@@ -76,7 +81,6 @@ namespace FalconPoint4
         {
             dispatch_pointer = this;
             COTsListener listen = new COTsListener(this);
-            KeyListener kybdShortcuts = new KeyListener();
         }
 
         public void GetEditorName(ref string editor_name)
@@ -271,6 +275,30 @@ namespace FalconPoint4
         public void GetMenuItems(int layer_handle, int object_handle, ref string menu_text)
         {
 
+           menu_text = displayText;
+
+
+        }
+
+
+        public void ViewMPH(long layer_handle, long object_handle)
+        {
+            DisplayChoice = Display.MPH;
+        }
+
+        public void ViewBearing(long layer_handle, long object_handle)
+        {
+            DisplayChoice = Display.Bearing;
+        }
+
+        public void ViewNone(long layer_handle, long object_handle)
+        {
+            DisplayChoice = Display.None;
+        }
+
+        public void ViewBoth(long layer_handle, long object_handle)
+        {
+            DisplayChoice = Display.Both;
         }
 
         public void GetTimeSpan(int layer_handle, ref DateTime begin, ref DateTime end)

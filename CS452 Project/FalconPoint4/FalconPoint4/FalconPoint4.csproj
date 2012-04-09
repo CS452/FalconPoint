@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -54,8 +54,9 @@
   <ItemGroup>
     <Compile Include="COTsListener.cs" />
     <Compile Include="FPdrawer.cs" />
-    <Compile Include="FPmain.cs" />
-    <Compile Include="KeyListener.cs" />
+    <Compile Include="FPmain.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Logistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -12,6 +12,7 @@ namespace FalconPoint4
     {
         string iconLoc = null;
         Logistics logistics = new Logistics();
+        public int YtextOffset = -40;
 
         public FPdrawer()
         {
@@ -25,7 +26,7 @@ namespace FalconPoint4
 
 
         //Austen: changed input params to pass entire layer list so that we'd have access to all it's values
-        public void CreatePoint(ILayer FP_point, int layer, LayerList layerList, string id, double lat, double lon, DateTime time, bool isStale)
+        public void CreatePoint(ILayer FP_point, int layer, LayerList layerList, string id, double lat, double lon, DateTime time, bool isStale, int displayChoice)
         {
             if (isStale == false)
                 iconLoc += "red turn.ico";
@@ -44,13 +45,34 @@ namespace FalconPoint4
                     double lon1 = layerList.FP_LatLonlist[layerList.FP_LatLonlist.Count - 1].lon;
                     DateTime time1 = layerList.FP_LatLonlist[layerList.FP_LatLonlist.Count - 1].time;
 
-                    double heading = logistics.Heading(lat, lon, lat1, lon1); //Compute heading
-                    double speed = logistics.SpeedMPH(lat, lon, lat1, lon1, time, time1); //Compute Speed
+                    double heading = logistics.Heading(lat, lon, lat1, lon1); // Compute heading
+                    double speed = logistics.SpeedMPH(lat, lon, lat1, lon1, time, time1); // Compute Speed
                     RenderArrow(FP_point, layerList, lat, lon, time, heading);
 
-                    AddUIDText(FP_point, layerList, lat, lon, heading, id);
-                    AddHeadingText(FP_point, layerList, lat, lon, heading);
-                    AddSpeedText(FP_point, layerList, lat, lon, speed, heading);
+                    //{MPH = 0, Bearing = 1, None = 2, Both = 3};
+                    if (displayChoice == 0) // if we want to see just mph
+                    {
+                        AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 15);
+                        AddSpeedText(FP_point, layerList, lat, lon, speed, heading, YtextOffset);
+                    }
+
+                    if (displayChoice == 1) // if we want to see just bearing
+                    {
+                        AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 15);
+                        AddHeadingText(FP_point, layerList, lat, lon, heading, YtextOffset);
+                    }
+
+                    if (displayChoice == 2) // if we want to see just id
+                    {
+                        AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset);
+                    }
+
+                    if (displayChoice == 3) // if we want to see just all
+                    {
+                        AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 30);
+                        AddSpeedText(FP_point, layerList, lat, lon, speed, heading, YtextOffset - 15);
+                        AddHeadingText(FP_point, layerList, lat, lon, heading, YtextOffset);
+                    }
                 }
 
                 FP_point.Refresh(-1);
@@ -77,28 +99,29 @@ namespace FalconPoint4
 
         }
 
-        public void AddUIDText(ILayer FP_point, LayerList layerList, double lat, double lon, double heading, string id)
+        public void AddUIDText(ILayer FP_point, LayerList layerList, double lat, double lon, double heading, string id, int YtextOffset)
         {
-            FP_point.AddText(layerList.Layer, lat, lon, id, OffsetText(heading), -70);
+            FP_point.AddText(layerList.Layer, lat, lon, id, XtextOffset(heading), YtextOffset);
         }
 
-        public void AddSpeedText(ILayer FP_point, LayerList layerList, double lat, double lon, double speed, double heading)
+        public void AddSpeedText(ILayer FP_point, LayerList layerList, double lat, double lon, double speed, double heading, int YtextOffset)
         {
-            FP_point.AddText(layerList.Layer, lat, lon, speed + " MPH", OffsetText(heading), -55);
+            FP_point.AddText(layerList.Layer, lat, lon, speed + " MPH", XtextOffset(heading), YtextOffset);
         }
 
-        public void AddHeadingText(ILayer FP_point, LayerList layerList, double lat, double lon, double heading)
+        public void AddHeadingText(ILayer FP_point, LayerList layerList, double lat, double lon, double heading, int YtextOffset)
         {
-            FP_point.AddText(layerList.Layer, lat, lon, heading + "°", OffsetText(heading), -40); // -13,-35 sets position of text
+            FP_point.AddText(layerList.Layer, lat, lon, heading + "°", XtextOffset(heading), YtextOffset); 
         }
 
-        public int OffsetText(double heading)
+        public int XtextOffset(double heading)
         {
             if (heading > 140 && heading < 220)
                 return -60;
 
             return -13;
         }
+
 
     }
 }
