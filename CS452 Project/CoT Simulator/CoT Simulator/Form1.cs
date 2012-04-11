@@ -19,9 +19,9 @@ namespace CoT_Simulator
         private string current_line;
         private string one_event_line;
         private List<string> event_list;
-        private int sleep_length = 1000; //TODO put this in the config file
+        private int sleep_length = 1000;
         private bool loaded_cot_flag = false;
-        private int timeOut = 2000;
+        private int timeOut = 1000;
 
         /* SAMPLE COTS INPUT
             <event version="2.0" uid="****" how="m-r" time="2012-01-29T00:07:06Z" stale="2012-01-29T00:47:06Z" type="a-f-G" start="2012-01-29T00:07:06Z">
@@ -37,6 +37,9 @@ namespace CoT_Simulator
 
             event_list = new List<string>();
             get_random_id();
+
+            TB_IP.Text = CoT_Simulator.Properties.Settings.Default.IP;
+            TB_port.Text = CoT_Simulator.Properties.Settings.Default.Port.ToString();
 
             backgroundWorker1.WorkerSupportsCancellation = true;
         }
@@ -255,6 +258,18 @@ namespace CoT_Simulator
                 backgroundWorker1.CancelAsync();
             else
                 backgroundWorker1.RunWorkerAsync();
+        }
+
+        private void configToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConfigForm config = new ConfigForm();
+            config.Show();
+        }
+
+        private void iPsave1_MouseClick(object sender, MouseEventArgs e)
+        {
+            CoT_Simulator.Properties.Settings.Default.IP = TB_IP.Text;
+            CoT_Simulator.Properties.Settings.Default.Save();
         }
 
 

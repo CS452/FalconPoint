@@ -33,6 +33,7 @@ namespace FalconPoint4
         private Thread listenThread;
         public FPmain _FPmainAddr = null;
         public int displayChoice = 0;
+        private int port = FalconPoint4.Properties.Settings.Default.Port;
 
         public ILayer FP_point = null;
         int currentLayerHandle = 0;
@@ -47,7 +48,7 @@ namespace FalconPoint4
         {
             _FPmainAddr = _FPmain; // used to get address of of FPmain for use in creating layers... gotta have address of "this" to create a layer
 
-            this.tcpListner = new TcpListener(IPAddress.Any, 3000);
+            this.tcpListner = new TcpListener(IPAddress.Any, port);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
         }
@@ -141,8 +142,6 @@ namespace FalconPoint4
             bool cotID_alreadyExists = false;
             bool isDataStale = false;
 
-            displayChoice = (int)(_FPmainAddr.DisplayChoice); // get the users display choice
-
             if (staleTime <= time)
                 isDataStale = true;
 
@@ -152,7 +151,7 @@ namespace FalconPoint4
                 {
                     FPdrawer drawPT_instance = new FPdrawer(); // create a new instance of the drawer class
 
-                    drawPT_instance.CreatePoint(FP_point,FP_layerList[i].Layer, FP_layerList[i], _cotID, _lat, _lon, time, isDataStale, displayChoice); // if cot uid already exists in list, then use it's layer
+                    drawPT_instance.CreatePoint(FP_point,FP_layerList[i].Layer, FP_layerList[i], _cotID, _lat, _lon, time, isDataStale); // if cot uid already exists in list, then use it's layer
 
                     LayerList.LatLongList temp_latLonList = new LayerList.LatLongList(); // temp list used to add lat and lon to our sub list... basically one main list holds LAYER and COTid and that list conists of another list that stores multiple lat, lon and times
                     temp_latLonList.lat = _lat;
@@ -170,7 +169,7 @@ namespace FalconPoint4
             {
                 CreateLayer(_cotID); // if we don't have this cotID, then we need to create a new layer
                 FPdrawer drawPT_instance = new FPdrawer(); // create a new instance of the drawer class
-                drawPT_instance.CreatePoint(FP_point, currentLayerHandle,new LayerList(), _cotID, _lat, _lon, time, isDataStale, displayChoice); // use the newly created layer
+                drawPT_instance.CreatePoint(FP_point, currentLayerHandle,new LayerList(), _cotID, _lat, _lon, time, isDataStale); // use the newly created layer
             }
         }
 

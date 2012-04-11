@@ -14,11 +14,7 @@ namespace FalconPoint4
 
     public class FPmain : ILayerEditor3, ICallback
     {
-        public enum Display {MPH = 0, Bearing = 1, None = 2, Both = 3};
-        public Display DisplayChoice = Display.Both;
-        public bool AlreadyCreatedRightClick = false;
-
-        public string displayText = "FalconPoint Display\\MPH\nViewMPH\nFalconPoint Display\\Bearing\nViewBearing\nFalconPoint Display\\None\nViewNone\nFalconPoint Display\\Both\nViewBoth";
+        public static int DisplayChoice = FalconPoint4.Properties.Settings.Default.DefaultLabel; // gets default choice from config file
 
         #region // Ilayer editor 3
 
@@ -274,31 +270,50 @@ namespace FalconPoint4
 
         public void GetMenuItems(int layer_handle, int object_handle, ref string menu_text)
         {
+            //{MPH = 0, Bearing = 1, None = 2, Both = 3};
+            // The strings below are based on falconview's documentation on how it deals with creating rightclick menus
+            // The reason for the array is to dispaly a * on the currently selected display option
+            string[] rightClickDisplay = new string[4];
+            rightClickDisplay[0] = "FalconPoint Display\\*MPH\nViewMPH\nFalconPoint Display\\Bearing\nViewBearing\nFalconPoint Display\\None\nViewNone\nFalconPoint Display\\Both\nViewBoth";
+            rightClickDisplay[1] = "FalconPoint Display\\MPH\nViewMPH\nFalconPoint Display\\*Bearing\nViewBearing\nFalconPoint Display\\None\nViewNone\nFalconPoint Display\\Both\nViewBoth";
+            rightClickDisplay[2] = "FalconPoint Display\\MPH\nViewMPH\nFalconPoint Display\\Bearing\nViewBearing\nFalconPoint Display\\*None\nViewNone\nFalconPoint Display\\Both\nViewBoth";
+            rightClickDisplay[3] = "FalconPoint Display\\MPH\nViewMPH\nFalconPoint Display\\Bearing\nViewBearing\nFalconPoint Display\\None\nViewNone\nFalconPoint Display\\*Both\nViewBoth";
+            string rightClickConfig = "FalconPoint Config\nConfig";
 
-           menu_text = displayText;
+            // The first time Falconview calls FPmain, it creates a default layer at handle 100.  We only want to get capture the right click at that layer.
+            if (layer_handle == 101) // first layer created... this is before any icons are added
+                menu_text = rightClickConfig;
 
+            if (layer_handle == 102) // second layer created... after one item is added
+                menu_text = rightClickDisplay[DisplayChoice];
 
+        }
+
+        public void Config(long layer_handle, long object_handle)
+        {
+            ConfigForm config = new ConfigForm();
+            config.Show();
         }
 
 
         public void ViewMPH(long layer_handle, long object_handle)
         {
-            DisplayChoice = Display.MPH;
+            DisplayChoice = 0; // diplay mph
         }
 
         public void ViewBearing(long layer_handle, long object_handle)
         {
-            DisplayChoice = Display.Bearing;
+            DisplayChoice = 1; // display bearing
         }
 
         public void ViewNone(long layer_handle, long object_handle)
         {
-            DisplayChoice = Display.None;
+            DisplayChoice = 2; // display none- id only
         }
 
         public void ViewBoth(long layer_handle, long object_handle)
         {
-            DisplayChoice = Display.Both;
+            DisplayChoice = 3; // display all
         }
 
         public void GetTimeSpan(int layer_handle, ref DateTime begin, ref DateTime end)

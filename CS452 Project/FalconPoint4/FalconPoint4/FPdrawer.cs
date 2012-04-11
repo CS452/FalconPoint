@@ -16,22 +16,37 @@ namespace FalconPoint4
 
         public FPdrawer()
         {
-
-            if (System.Environment.Is64BitOperatingSystem == true)
-                iconLoc = "C:\\Program Files (x86)\\PFPS\\falcon\\data\\icons\\Shape\\";
-            else
-                iconLoc = "C:\\Program Files\\PFPS\\falcon\\data\\icons\\Shape\\";
+            InitConfigFile();
             
+        }
+
+        public void InitConfigFile()
+        {
+            if (FalconPoint4.Properties.Settings.Default.DefaultIcon == null)
+            {
+                if (System.Environment.Is64BitOperatingSystem)
+                {
+                    FalconPoint4.Properties.Settings.Default.DefaultIcon = "C:\\Program Files (x86)\\PFPS\\falcon\\data\\icons\\Shape\\red turn.ico";
+                    FalconPoint4.Properties.Settings.Default.StaleIcon = "C:\\Program Files (x86)\\PFPS\\falcon\\data\\icons\\Shape\\white turn.ico";
+                }
+                else
+                {
+                    FalconPoint4.Properties.Settings.Default.DefaultIcon = "C:\\Program Files\\PFPS\\falcon\\data\\icons\\Shape\\red turn.ico";
+                    FalconPoint4.Properties.Settings.Default.StaleIcon = "C:\\Program Files\\PFPS\\falcon\\data\\icons\\Shape\\white turn.ico";
+                }
+
+                FalconPoint4.Properties.Settings.Default.Save();
+            }
         }
 
 
         //Austen: changed input params to pass entire layer list so that we'd have access to all it's values
-        public void CreatePoint(ILayer FP_point, int layer, LayerList layerList, string id, double lat, double lon, DateTime time, bool isStale, int displayChoice)
+        public void CreatePoint(ILayer FP_point, int layer, LayerList layerList, string id, double lat, double lon, DateTime time, bool isStale)
         {
             if (isStale == false)
-                iconLoc += "red turn.ico";
+                iconLoc = FalconPoint4.Properties.Settings.Default.DefaultIcon;
             else
-                iconLoc += "white turn.ico";
+                iconLoc = FalconPoint4.Properties.Settings.Default.StaleIcon;
 
             try
             {
@@ -50,24 +65,24 @@ namespace FalconPoint4
                     RenderArrow(FP_point, layerList, lat, lon, time, heading);
 
                     //{MPH = 0, Bearing = 1, None = 2, Both = 3};
-                    if (displayChoice == 0) // if we want to see just mph
+                    if (FPmain.DisplayChoice == 0) // if we want to see just mph
                     {
                         AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 15);
                         AddSpeedText(FP_point, layerList, lat, lon, speed, heading, YtextOffset);
                     }
 
-                    if (displayChoice == 1) // if we want to see just bearing
+                    if (FPmain.DisplayChoice == 1) // if we want to see just bearing
                     {
                         AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 15);
                         AddHeadingText(FP_point, layerList, lat, lon, heading, YtextOffset);
                     }
 
-                    if (displayChoice == 2) // if we want to see just id
+                    if (FPmain.DisplayChoice == 2) // if we want to see just id
                     {
                         AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset);
                     }
 
-                    if (displayChoice == 3) // if we want to see just all
+                    if (FPmain.DisplayChoice == 3) // if we want to see just all
                     {
                         AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 30);
                         AddSpeedText(FP_point, layerList, lat, lon, speed, heading, YtextOffset - 15);

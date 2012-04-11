@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TransmitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TB_IP = new System.Windows.Forms.TextBox();
@@ -47,6 +49,7 @@
             this.rbTCP = new System.Windows.Forms.RadioButton();
             this.rbUDP = new System.Windows.Forms.RadioButton();
             this.staleData = new System.Windows.Forms.CheckBox();
+            this.iPsave1 = new CoT_Simulator.IPsave();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,6 +73,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
+            this.configToolStripMenuItem,
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -81,6 +85,13 @@
             this.openToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.openToolStripMenuItem.Text = "Open CoT File";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.Open_File_Click);
+            // 
+            // configToolStripMenuItem
+            // 
+            this.configToolStripMenuItem.Name = "configToolStripMenuItem";
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.configToolStripMenuItem.Text = "Config";
+            this.configToolStripMenuItem.Click += new System.EventHandler(this.configToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
@@ -100,7 +111,7 @@
             // 
             this.TB_IP.Location = new System.Drawing.Point(16, 52);
             this.TB_IP.Name = "TB_IP";
-            this.TB_IP.Size = new System.Drawing.Size(184, 20);
+            this.TB_IP.Size = new System.Drawing.Size(153, 20);
             this.TB_IP.TabIndex = 4;
             this.TB_IP.Text = "192.168.1.103";
             // 
@@ -216,11 +227,24 @@
             this.staleData.Text = "Make Data Stale";
             this.staleData.UseVisualStyleBackColor = true;
             // 
+            // iPsave1
+            // 
+            this.iPsave1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("iPsave1.BackgroundImage")));
+            this.iPsave1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.iPsave1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iPsave1.Location = new System.Drawing.Point(171, 46);
+            this.iPsave1.Margin = new System.Windows.Forms.Padding(0);
+            this.iPsave1.Name = "iPsave1";
+            this.iPsave1.Size = new System.Drawing.Size(27, 30);
+            this.iPsave1.TabIndex = 20;
+            this.iPsave1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.iPsave1_MouseClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(302, 284);
+            this.Controls.Add(this.iPsave1);
             this.Controls.Add(this.staleData);
             this.Controls.Add(this.rbUDP);
             this.Controls.Add(this.rbTCP);
@@ -264,6 +288,8 @@
         private System.Windows.Forms.RadioButton rbTCP;
         private System.Windows.Forms.RadioButton rbUDP;
         private System.Windows.Forms.CheckBox staleData;
+        private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
+        private IPsave iPsave1;
 
     }
 }

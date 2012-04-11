@@ -97,3 +97,7 @@ C:\Workspace 2\CS452\CS452 Project\FalconPoint4\FalconPoint4\bin\Debug\FalconPoi
 C:\Workspace 2\CS452\CS452 Project\FalconPoint4\FalconPoint4\bin\Debug\Interop.fvw.dll
 C:\Workspace 2\CS452\CS452 Project\FalconPoint4\FalconPoint4\bin\Debug\Interop.MAPENGINELib.dll
 C:\Workspace 2\CS452\CS452 Project\FalconPoint4\FalconPoint4\obj\Debug\FalconPoint4.pdb
+C:\Workspace 2\CS452\CS452 Project\FalconPoint4\FalconPoint4\bin\Debug\FalconPoint4.dll.config
+C:\Workspace 2\CS452\CS452 Project\FalconPoint4\FalconPoint4\obj\Debug\FalconPoint4.ConfigForm.resources
+C:\Workspace 2\CS452\CS452 Project\FalconPoint4\FalconPoint4\obj\Debug\GenerateResource.read.1.tlog
+C:\Workspace 2\CS452\CS452 Project\FalconPoint4\FalconPoint4\obj\Debug\GenerateResource.write.1.tlog
