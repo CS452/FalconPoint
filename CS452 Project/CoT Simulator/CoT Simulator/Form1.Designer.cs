@@ -33,7 +33,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TransmitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TB_IP = new System.Windows.Forms.TextBox();
@@ -50,6 +49,7 @@
             this.rbUDP = new System.Windows.Forms.RadioButton();
             this.staleData = new System.Windows.Forms.CheckBox();
             this.iPsave1 = new CoT_Simulator.IPsave();
+            this.ConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +61,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.TransmitToolStripMenuItem});
+            this.TransmitToolStripMenuItem,
+            this.ConfigToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -73,7 +74,6 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.configToolStripMenuItem,
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -85,13 +85,6 @@
             this.openToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.openToolStripMenuItem.Text = "Open CoT File";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.Open_File_Click);
-            // 
-            // configToolStripMenuItem
-            // 
-            this.configToolStripMenuItem.Name = "configToolStripMenuItem";
-            this.configToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.configToolStripMenuItem.Text = "Config";
-            this.configToolStripMenuItem.Click += new System.EventHandler(this.configToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
@@ -239,6 +232,12 @@
             this.iPsave1.TabIndex = 20;
             this.iPsave1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.iPsave1_MouseClick);
             // 
+            // ConfigToolStripMenuItem
+            // 
+            this.ConfigToolStripMenuItem.Name = "ConfigToolStripMenuItem";
+            this.ConfigToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.ConfigToolStripMenuItem.Text = "Config";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -288,8 +287,8 @@
         private System.Windows.Forms.RadioButton rbTCP;
         private System.Windows.Forms.RadioButton rbUDP;
         private System.Windows.Forms.CheckBox staleData;
-        private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
         private IPsave iPsave1;
+        private System.Windows.Forms.ToolStripMenuItem ConfigToolStripMenuItem;
 
     }
 }

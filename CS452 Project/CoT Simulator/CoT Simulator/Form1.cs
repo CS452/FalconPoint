@@ -35,6 +35,8 @@ namespace CoT_Simulator
         {
             InitializeComponent();
 
+            BUT_StartTransmit.Text = "Load File";
+
             event_list = new List<string>();
             get_random_id();
 
@@ -55,7 +57,11 @@ namespace CoT_Simulator
 
             if (file != null)
             {
+                BUT_StartTransmit.Text = "Transmit";
                 loaded_cot_flag = true;
+
+                CoT_Simulator.Properties.Settings.Default.LastFile = file;
+                CoT_Simulator.Properties.Settings.Default.Save();
 
                 try
                 {
@@ -109,7 +115,7 @@ namespace CoT_Simulator
             string current_lineMod = _text;
             string _time = null;
 
-            if(current_lineMod.Contains("stale=") == true && current_lineMod.Contains("time=") == true); // be sure that we are on a line that has a line called stale & time
+            if(current_lineMod.Contains("stale=") == true && current_lineMod.Contains("time=") == true) // be sure that we are on a line that has a line called stale & time
             {
                 _time = current_lineMod.Remove(0, current_lineMod.IndexOf("time")); // remove everything to the left of time field
                 _time = _time.Remove(0, _time.IndexOf("\"")+1); // remove "time=" from string
@@ -251,9 +257,12 @@ namespace CoT_Simulator
         }
 
         private void BUT_StartTransmit_Click(object sender, EventArgs e)
-        {
+        {   
+            // if we have never loaded a file
             if (loaded_cot_flag == false)
-                MessageBox.Show("Load COTS file first");
+            {
+                Open_File_Click(sender, e);
+            }
             else if (backgroundWorker1.IsBusy == true)
                 backgroundWorker1.CancelAsync();
             else
@@ -271,11 +280,6 @@ namespace CoT_Simulator
             CoT_Simulator.Properties.Settings.Default.IP = TB_IP.Text;
             CoT_Simulator.Properties.Settings.Default.Save();
         }
-
-
-
-
-
 
     }
 }

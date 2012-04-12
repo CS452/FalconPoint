@@ -16,8 +16,7 @@ namespace FalconPoint4
 
         public FPdrawer()
         {
-            InitConfigFile();
-            
+            InitConfigFile();   
         }
 
         public void InitConfigFile()

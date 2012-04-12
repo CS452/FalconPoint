@@ -14,6 +14,7 @@ namespace FalconPoint4
 
     public class FPmain : ILayerEditor3, ICallback
     {
+        private COTsListener listen;
         public static int DisplayChoice = FalconPoint4.Properties.Settings.Default.DefaultLabel; // gets default choice from config file
 
         #region // Ilayer editor 3
@@ -76,7 +77,7 @@ namespace FalconPoint4
         public void GetDispatchPtr(ref object dispatch_pointer)
         {
             dispatch_pointer = this;
-            COTsListener listen = new COTsListener(this);
+            listen = new COTsListener(this);
         }
 
         public void GetEditorName(ref string editor_name)
@@ -241,9 +242,6 @@ namespace FalconPoint4
 
         }
 
-
-
-
         public void TestSelected(int layer_handle, int object_handle, double lat, double lon, int flags, ref int hcur, ref string tooltip, ref string helptext, ref int return_val)
         {
 
@@ -292,6 +290,7 @@ namespace FalconPoint4
         public void Config(long layer_handle, long object_handle)
         {
             ConfigForm config = new ConfigForm();
+            config.CotListenerConnection = listen;
             config.Show();
         }
 

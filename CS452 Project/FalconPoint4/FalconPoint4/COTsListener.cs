@@ -26,7 +26,7 @@ namespace FalconPoint4
     }
 
     // Listens for feeds on a port.  If a feed is detected, then it starts the plotting process by calling FPdrawer
-    class COTsListener
+    public class COTsListener
     {
         // Global variables and object init
         private TcpListener tcpListner;
@@ -289,6 +289,14 @@ namespace FalconPoint4
 
             return currentLayerHandle; // return the newly created layer handle ... should be something like 102, 103..
 
+        }
+
+        public void ClearScreen()
+        {
+            for (int i = 0; i < FP_layerList.Count; i++)
+            {
+                FP_point.DeleteAllObjects(FP_layerList[i].Layer);
+            }
         }
     }
 }

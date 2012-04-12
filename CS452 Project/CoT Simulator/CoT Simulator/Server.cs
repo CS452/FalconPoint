@@ -5,9 +5,6 @@ using System.Threading;
 using System.Net;
 using System.Windows.Forms;
 using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
 
 namespace CoT_Simulator
 {
