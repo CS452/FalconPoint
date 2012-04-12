@@ -269,16 +269,16 @@ namespace CoT_Simulator
                 backgroundWorker1.RunWorkerAsync();
         }
 
-        private void configToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ConfigForm config = new ConfigForm();
-            config.Show();
-        }
-
         private void iPsave1_MouseClick(object sender, MouseEventArgs e)
         {
             CoT_Simulator.Properties.Settings.Default.IP = TB_IP.Text;
             CoT_Simulator.Properties.Settings.Default.Save();
+        }
+
+        private void ConfigToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            ConfigForm config = new ConfigForm();
+            config.Show();
         }
 
     }

@@ -35,6 +35,7 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TransmitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TB_IP = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,7 +50,6 @@
             this.rbUDP = new System.Windows.Forms.RadioButton();
             this.staleData = new System.Windows.Forms.CheckBox();
             this.iPsave1 = new CoT_Simulator.IPsave();
-            this.ConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,6 +99,13 @@
             this.TransmitToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.TransmitToolStripMenuItem.Text = "Transmit";
             this.TransmitToolStripMenuItem.Click += new System.EventHandler(this.TransmitToolStripMenuItem_Click);
+            // 
+            // ConfigToolStripMenuItem
+            // 
+            this.ConfigToolStripMenuItem.Name = "ConfigToolStripMenuItem";
+            this.ConfigToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.ConfigToolStripMenuItem.Text = "Config";
+            this.ConfigToolStripMenuItem.Click += new System.EventHandler(this.ConfigToolStripMenuItem_Click_1);
             // 
             // TB_IP
             // 
@@ -231,12 +238,6 @@
             this.iPsave1.Size = new System.Drawing.Size(27, 30);
             this.iPsave1.TabIndex = 20;
             this.iPsave1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.iPsave1_MouseClick);
-            // 
-            // ConfigToolStripMenuItem
-            // 
-            this.ConfigToolStripMenuItem.Name = "ConfigToolStripMenuItem";
-            this.ConfigToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.ConfigToolStripMenuItem.Text = "Config";
             // 
             // Form1
             // 
