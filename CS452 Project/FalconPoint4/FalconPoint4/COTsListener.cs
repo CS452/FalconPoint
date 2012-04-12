@@ -251,7 +251,7 @@ namespace FalconPoint4
             int wheresLastQuote = _rtnString.IndexOf("\"", whereFirstQuote + 1);
             string _time = null;
             string _date = null;
-            DateTime _rtnTime;
+            DateTime _rtnTime = DateTime.UtcNow;
 
             _rtnString = _rtnString.Remove(wheresLastQuote, (_rtnString.Length - wheresLastQuote)); // get rid stuff to the right of field "time"
             _rtnString = _rtnString.TrimEnd('Z'); // trim the z off the end
@@ -262,7 +262,14 @@ namespace FalconPoint4
             _time = _rtnString.Remove(0, _rtnString.IndexOf('T') + 1); // adds everthing after the T to the _time string
 
             _rtnString = _date + " " + _time;
-            _rtnTime = Convert.ToDateTime(_rtnString);
+
+            try
+            {
+                _rtnTime = Convert.ToDateTime(_rtnString);
+            }
+            catch
+            {
+            }
 
             return _rtnTime;
         }
