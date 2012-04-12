@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FalconPoint4.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3000</Value>
+    </Setting>
+    <Setting Name="DefaultIcon" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\PFPS\falcon\data\icons\Shape\red turn.ico</Value>
+    </Setting>
+    <Setting Name="StaleIcon" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\PFPS\falcon\data\icons\Shape\white turn.ico</Value>
+    </Setting>
+    <Setting Name="DefaultLabel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
