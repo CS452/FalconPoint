@@ -68,29 +68,24 @@ namespace FalconPoint4
         {
             string file = null;
 
-            DialogResult result = OpenDialog.ShowDialog();
+            folderBrowserDialog1.SelectedPath = FalconPoint4.Properties.Settings.Default.DefaultIconFolder;
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            //DialogResult result = OpenDialog.ShowDialog();
+
 
             if (result == DialogResult.OK)
             {
-                file = OpenDialog.FileName;
+                file = folderBrowserDialog1.SelectedPath;
+                //file = OpenDialog.FileName;
+                TextBoxDefaultIcon.Text = file + "\\"; ;
+                FalconPoint4.Properties.Settings.Default.DefaultIconFolder = TextBoxDefaultIcon.Text;
+                FalconPoint4.Properties.Settings.Default.Save();
             }
 
-            TextBoxDefaultIcon.Text = file;
+
         }
 
-        private void ButtonLoadStaleIcon_Click(object sender, EventArgs e)
-        {
-            string file = null;
 
-            DialogResult result = OpenDialog.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                file = OpenDialog.FileName;
-            }
-
-            TB_howLongForStale.Text = file;
-        }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
         {

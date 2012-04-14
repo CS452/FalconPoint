@@ -44,6 +44,7 @@
             this.ButtonLoadDefaultIcon = new System.Windows.Forms.Label();
             this.OpenDialog = new System.Windows.Forms.OpenFileDialog();
             this.clearScreen = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -237,5 +238,6 @@
         private System.Windows.Forms.Label ButtonLoadDefaultIcon;
         private System.Windows.Forms.OpenFileDialog OpenDialog;
         private System.Windows.Forms.Button clearScreen;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

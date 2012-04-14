@@ -46,8 +46,11 @@ namespace FalconPoint4
         {
             iconLoc = FalconPoint4.Properties.Settings.Default.DefaultIconFolder + WhichIcon(id);
 
-            if (isStale == true) // data is stale - id += " - STALE";
+            if (isStale == true) // data is stale - 
+            {
+                id += " - STALE";
                 FP_point.SetPen(layer, 0, 0, 0, 0, 0, 0, 1, 3, 0);
+            }
             else // data is not stale
                 FP_point.SetPen(layer, 50, 205, 50, 0, 0, 0, 0, 3, 0);
 
