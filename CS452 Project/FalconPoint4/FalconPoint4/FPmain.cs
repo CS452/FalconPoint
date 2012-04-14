@@ -12,10 +12,11 @@ namespace FalconPoint4
 {
     [Guid("CC9BE44B-9E3F-4100-9EC5-9C33E53B9917")]
 
-    public class FPmain : ILayerEditor3, ICallback
+    public class FPmain : ILayerEditor3, ICallback, ILayerEditor
     {
         private COTsListener listen;
         public static int DisplayChoice = FalconPoint4.Properties.Settings.Default.DefaultLabel; // gets default choice from config file
+        private const string TOOLBAR_DIR = "C:\\icon.bmp";
 
         #region // Ilayer editor 3
 
@@ -77,6 +78,7 @@ namespace FalconPoint4
         public void GetDispatchPtr(ref object dispatch_pointer)
         {
             dispatch_pointer = this;
+           // this.GetEditorToolbarButton(ref iconLoc);
             listen = new COTsListener(this);
         }
 
@@ -93,14 +95,15 @@ namespace FalconPoint4
 
         public void GetEditorToolbarButton(ref string button_filename)
         {
-            // TODO add custom button
-            button_filename = "C:\\Program Files\\PFPS\\falcon\\data\\icons\\Shape\\red turn.ico";
+            button_filename = TOOLBAR_DIR;
         }
 
         public void GetIconName(ref string icon_name)
         {
             // TODO add custom button
+            
             icon_name = "C:\\Program Files\\PFPS\\falcon\\data\\icons\\Shape\\red turn.ico";
+
         }
 
         public void GetNextNewFileName(ref string next_new_filename)

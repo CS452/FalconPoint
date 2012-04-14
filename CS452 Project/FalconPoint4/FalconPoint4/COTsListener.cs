@@ -12,9 +12,9 @@ namespace FalconPoint4
     // Keeps track of UID and the layer that we put them on
     public class LayerList 
     {
-        public string cotID;
-        public int Layer;
-
+        public string cotID = null;
+        public int Layer = 0;
+        public bool showArrow = true;
         public IList<LatLongList> FP_LatLonlist = new List<LatLongList>(); // list to keep track of all lat and longs assoc. with a particular cotID
 
         public class LatLongList // used to keep track of all lat and longs assoc. with a particular cotID
@@ -22,6 +22,7 @@ namespace FalconPoint4
             public double lat;
             public double lon;
             public DateTime time;
+
         }
     }
 
@@ -75,11 +76,11 @@ namespace FalconPoint4
         private void HandleClientComm(object client)
         {
             string messageString = null;
-            double currentLat;
-            double currentLon;
-            string currentID;
-            DateTime currentTime;
-            DateTime staleTime;
+            double currentLat = 0;
+            double currentLon = 0;
+            string currentID = null;
+            DateTime currentTime = DateTime.Now;
+            DateTime staleTime = DateTime.Now;
 
             TcpClient tcpClient = (TcpClient)client;
             NetworkStream clienStream = tcpClient.GetStream();
@@ -125,6 +126,8 @@ namespace FalconPoint4
                 AddCordsToList_andDraw(currentID, currentLat, currentLon, currentTime, staleTime);
             }
 
+            LostSignal(currentID, currentLat, currentLon, currentTime, staleTime);
+
             tcpClient.Close();
         }
 
@@ -135,14 +138,12 @@ namespace FalconPoint4
          */
         public void AddCordsToList_andDraw(string _cotID, double _lat, double _lon, DateTime time, DateTime staleTime)
         {
-            //Haversine newDistance = new Haversine();
-
-            //double distance = newDistance.Distance();
-
             bool cotID_alreadyExists = false;
             bool isDataStale = false;
+            DateTime timeWithStaleTimeAdded = time.AddSeconds(FalconPoint4.Properties.Settings.Default.HowLongForStale);
 
-            if (staleTime <= time)
+            // Determine if time is stale
+            if ((time.AddSeconds(FalconPoint4.Properties.Settings.Default.HowLongForStale) <= staleTime))
                 isDataStale = true;
 
             for(int i=0; i<FP_layerList.Count; i++) // itterate through list to see if the current cotID has already been added to list
@@ -151,7 +152,9 @@ namespace FalconPoint4
                 {
                     FPdrawer drawPT_instance = new FPdrawer(); // create a new instance of the drawer class
 
-                    drawPT_instance.CreatePoint(FP_point,FP_layerList[i].Layer, FP_layerList[i], _cotID, _lat, _lon, time, isDataStale); // if cot uid already exists in list, then use it's layer
+                    // draw point
+                    // if cot uid already exists in list, then use it's layer
+                    drawPT_instance.CreatePoint(FP_point,FP_layerList[i].Layer, FP_layerList[i], _cotID, _lat, _lon, time, isDataStale); 
 
                     LayerList.LatLongList temp_latLonList = new LayerList.LatLongList(); // temp list used to add lat and lon to our sub list... basically one main list holds LAYER and COTid and that list conists of another list that stores multiple lat, lon and times
                     temp_latLonList.lat = _lat;
@@ -170,6 +173,25 @@ namespace FalconPoint4
                 CreateLayer(_cotID); // if we don't have this cotID, then we need to create a new layer
                 FPdrawer drawPT_instance = new FPdrawer(); // create a new instance of the drawer class
                 drawPT_instance.CreatePoint(FP_point, currentLayerHandle,new LayerList(), _cotID, _lat, _lon, time, isDataStale); // use the newly created layer
+            }
+        }
+
+        // if we stop receiving a signal from the simulator
+        // then turn the arrow off
+        public void LostSignal(string _cotID, double _lat, double _lon, DateTime time, DateTime staleTime)
+        {
+            // Iterate through list to find our _cotID
+            if(FP_layerList.Count>0)
+            {
+                for(int i=0; i<FP_layerList.Count; i++)
+                {
+                    if(FP_layerList[i].cotID == _cotID)
+                    {
+                        FP_layerList[i].showArrow = false;
+                        AddCordsToList_andDraw(_cotID, _lat, _lon, time, staleTime); // draw last coord again without arrow
+                        
+                    }
+                }
             }
         }
 
@@ -277,6 +299,7 @@ namespace FalconPoint4
 
             result = FP_point.RegisterWithMapServer("falconpoint", 0, _FPmainAddr); // result is used for debugging
             currentLayerHandle = FP_point.CreateLayer("FP layer");
+            FP_point.SetupToolbarButton(101, 1, "help", "fp");
 
             System.Diagnostics.Debug.WriteLine("registered with map server result = " + currentLayerHandle); // used for debugging... shows registration result in output window
 
@@ -296,6 +319,7 @@ namespace FalconPoint4
             for (int i = 0; i < FP_layerList.Count; i++)
             {
                 FP_point.DeleteAllObjects(FP_layerList[i].Layer);
+                FP_point.Refresh(-1);
             }
         }
     }

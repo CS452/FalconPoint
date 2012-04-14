@@ -38,10 +38,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.TextBoxDefaultIcon = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.TextBoxStaleIcon = new System.Windows.Forms.TextBox();
+            this.TB_howLongForStale = new System.Windows.Forms.TextBox();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.ButtonCancel = new System.Windows.Forms.Button();
-            this.ButtonLoadStaleIcon = new System.Windows.Forms.Label();
             this.ButtonLoadDefaultIcon = new System.Windows.Forms.Label();
             this.OpenDialog = new System.Windows.Forms.OpenFileDialog();
             this.clearScreen = new System.Windows.Forms.Button();
@@ -125,9 +124,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(32, 69);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 13);
+            this.label2.Size = new System.Drawing.Size(104, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Default Icon Location";
+            this.label2.Text = "Icon Folder Location";
             // 
             // TextBoxDefaultIcon
             // 
@@ -141,16 +140,17 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(32, 121);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 13);
+            this.label3.Size = new System.Drawing.Size(116, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Stale Icon Location";
+            this.label3.Text = "How long for stale data";
             // 
-            // TextBoxStaleIcon
+            // TB_howLongForStale
             // 
-            this.TextBoxStaleIcon.Location = new System.Drawing.Point(35, 137);
-            this.TextBoxStaleIcon.Name = "TextBoxStaleIcon";
-            this.TextBoxStaleIcon.Size = new System.Drawing.Size(246, 20);
-            this.TextBoxStaleIcon.TabIndex = 7;
+            this.TB_howLongForStale.Location = new System.Drawing.Point(35, 137);
+            this.TB_howLongForStale.Name = "TB_howLongForStale";
+            this.TB_howLongForStale.Size = new System.Drawing.Size(106, 20);
+            this.TB_howLongForStale.TabIndex = 7;
+            this.TB_howLongForStale.Text = "30";
             // 
             // ButtonSave
             // 
@@ -171,17 +171,6 @@
             this.ButtonCancel.Text = "Cancel";
             this.ButtonCancel.UseVisualStyleBackColor = true;
             this.ButtonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
-            // 
-            // ButtonLoadStaleIcon
-            // 
-            this.ButtonLoadStaleIcon.AutoSize = true;
-            this.ButtonLoadStaleIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ButtonLoadStaleIcon.Location = new System.Drawing.Point(287, 140);
-            this.ButtonLoadStaleIcon.Name = "ButtonLoadStaleIcon";
-            this.ButtonLoadStaleIcon.Size = new System.Drawing.Size(18, 15);
-            this.ButtonLoadStaleIcon.TabIndex = 15;
-            this.ButtonLoadStaleIcon.Text = "...";
-            this.ButtonLoadStaleIcon.Click += new System.EventHandler(this.ButtonLoadStaleIcon_Click);
             // 
             // ButtonLoadDefaultIcon
             // 
@@ -211,11 +200,10 @@
             this.ClientSize = new System.Drawing.Size(354, 327);
             this.Controls.Add(this.clearScreen);
             this.Controls.Add(this.ButtonLoadDefaultIcon);
-            this.Controls.Add(this.ButtonLoadStaleIcon);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.TextBoxStaleIcon);
+            this.Controls.Add(this.TB_howLongForStale);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TextBoxDefaultIcon);
             this.Controls.Add(this.groupBox1);
@@ -243,10 +231,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TextBoxDefaultIcon;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TextBoxStaleIcon;
+        private System.Windows.Forms.TextBox TB_howLongForStale;
         private System.Windows.Forms.Button ButtonSave;
         private System.Windows.Forms.Button ButtonCancel;
-        private System.Windows.Forms.Label ButtonLoadStaleIcon;
         private System.Windows.Forms.Label ButtonLoadDefaultIcon;
         private System.Windows.Forms.OpenFileDialog OpenDialog;
         private System.Windows.Forms.Button clearScreen;

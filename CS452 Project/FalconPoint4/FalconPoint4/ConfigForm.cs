@@ -26,8 +26,8 @@ namespace FalconPoint4
         private void PopulateGUIfromSettings()
         {
 
-            TextBoxDefaultIcon.Text = FalconPoint4.Properties.Settings.Default.DefaultIcon;
-            TextBoxStaleIcon.Text = FalconPoint4.Properties.Settings.Default.StaleIcon;
+            TextBoxDefaultIcon.Text = FalconPoint4.Properties.Settings.Default.DefaultIconFolder;
+            TB_howLongForStale.Text = FalconPoint4.Properties.Settings.Default.HowLongForStale.ToString();
             PortTextBox.Text = FalconPoint4.Properties.Settings.Default.Port.ToString();
 
             //{MPH = 0, Bearing = 1, None = 2, Both = 3};
@@ -44,9 +44,9 @@ namespace FalconPoint4
 
         private void SaveValuesToSettings()
         {
-            FalconPoint4.Properties.Settings.Default.DefaultIcon = TextBoxDefaultIcon.Text;
-            FalconPoint4.Properties.Settings.Default.StaleIcon = TextBoxStaleIcon.Text;
-            FalconPoint4.Properties.Settings.Default.Port = Convert.ToInt16(PortTextBox.Text);
+            FalconPoint4.Properties.Settings.Default.DefaultIconFolder = TextBoxDefaultIcon.Text;
+            FalconPoint4.Properties.Settings.Default.HowLongForStale =Convert.ToInt32(TB_howLongForStale.Text);
+            FalconPoint4.Properties.Settings.Default.Port = Convert.ToInt32(PortTextBox.Text);
 
             if (RadioBoth.Checked == true)
                 FalconPoint4.Properties.Settings.Default.DefaultLabel = 3;
@@ -89,7 +89,7 @@ namespace FalconPoint4
                 file = OpenDialog.FileName;
             }
 
-            TextBoxStaleIcon.Text = file;
+            TB_howLongForStale.Text = file;
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
@@ -106,6 +106,7 @@ namespace FalconPoint4
         private void clearScreen_Click(object sender, EventArgs e)
         {
             CotListenerConnection.ClearScreen();
+            this.Close();
         }
 
 

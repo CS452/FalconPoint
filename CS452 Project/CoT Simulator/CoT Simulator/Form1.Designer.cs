@@ -45,12 +45,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.TB_UID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.CB_loop = new System.Windows.Forms.CheckBox();
-            this.rbTCP = new System.Windows.Forms.RadioButton();
-            this.rbUDP = new System.Windows.Forms.RadioButton();
-            this.staleData = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Radio_heli = new System.Windows.Forms.RadioButton();
+            this.Radio_air = new System.Windows.Forms.RadioButton();
+            this.Radio_car = new System.Windows.Forms.RadioButton();
+            this.Radio_foot = new System.Windows.Forms.RadioButton();
             this.iPsave1 = new CoT_Simulator.IPsave();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TB_howlongforstale = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -148,7 +152,7 @@
             // BUT_StartTransmit
             // 
             this.BUT_StartTransmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BUT_StartTransmit.Location = new System.Drawing.Point(16, 194);
+            this.BUT_StartTransmit.Location = new System.Drawing.Point(21, 251);
             this.BUT_StartTransmit.Name = "BUT_StartTransmit";
             this.BUT_StartTransmit.Size = new System.Drawing.Size(263, 77);
             this.BUT_StartTransmit.TabIndex = 9;
@@ -183,49 +187,64 @@
             this.label4.Text = "...";
             this.label4.Click += new System.EventHandler(this.random_num_button);
             // 
-            // CB_loop
+            // groupBox1
             // 
-            this.CB_loop.AutoSize = true;
-            this.CB_loop.Checked = true;
-            this.CB_loop.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CB_loop.Location = new System.Drawing.Point(16, 164);
-            this.CB_loop.Name = "CB_loop";
-            this.CB_loop.Size = new System.Drawing.Size(75, 17);
-            this.CB_loop.TabIndex = 17;
-            this.CB_loop.Text = "Loop File?";
-            this.CB_loop.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.Radio_heli);
+            this.groupBox1.Controls.Add(this.Radio_air);
+            this.groupBox1.Controls.Add(this.Radio_car);
+            this.groupBox1.Controls.Add(this.Radio_foot);
+            this.groupBox1.Location = new System.Drawing.Point(16, 129);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(234, 44);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Type";
             // 
-            // rbTCP
+            // Radio_heli
             // 
-            this.rbTCP.AutoSize = true;
-            this.rbTCP.Checked = true;
-            this.rbTCP.Location = new System.Drawing.Point(139, 140);
-            this.rbTCP.Name = "rbTCP";
-            this.rbTCP.Size = new System.Drawing.Size(61, 17);
-            this.rbTCP.TabIndex = 18;
-            this.rbTCP.TabStop = true;
-            this.rbTCP.Text = "TCP/IP";
-            this.rbTCP.UseVisualStyleBackColor = true;
+            this.Radio_heli.AutoSize = true;
+            this.Radio_heli.Location = new System.Drawing.Point(176, 19);
+            this.Radio_heli.Name = "Radio_heli";
+            this.Radio_heli.Size = new System.Drawing.Size(43, 17);
+            this.Radio_heli.TabIndex = 3;
+            this.Radio_heli.Text = "Heli";
+            this.Radio_heli.UseVisualStyleBackColor = true;
+            this.Radio_heli.CheckedChanged += new System.EventHandler(this.Radio_heli_CheckedChanged);
             // 
-            // rbUDP
+            // Radio_air
             // 
-            this.rbUDP.AutoSize = true;
-            this.rbUDP.Location = new System.Drawing.Point(139, 163);
-            this.rbUDP.Name = "rbUDP";
-            this.rbUDP.Size = new System.Drawing.Size(48, 17);
-            this.rbUDP.TabIndex = 18;
-            this.rbUDP.Text = "UDP";
-            this.rbUDP.UseVisualStyleBackColor = true;
+            this.Radio_air.AutoSize = true;
+            this.Radio_air.Location = new System.Drawing.Point(110, 19);
+            this.Radio_air.Name = "Radio_air";
+            this.Radio_air.Size = new System.Drawing.Size(63, 17);
+            this.Radio_air.TabIndex = 2;
+            this.Radio_air.Text = "Airplane";
+            this.Radio_air.UseVisualStyleBackColor = true;
+            this.Radio_air.CheckedChanged += new System.EventHandler(this.Radio_air_CheckedChanged);
             // 
-            // staleData
+            // Radio_car
             // 
-            this.staleData.AutoSize = true;
-            this.staleData.Location = new System.Drawing.Point(16, 141);
-            this.staleData.Name = "staleData";
-            this.staleData.Size = new System.Drawing.Size(106, 17);
-            this.staleData.TabIndex = 19;
-            this.staleData.Text = "Make Data Stale";
-            this.staleData.UseVisualStyleBackColor = true;
+            this.Radio_car.AutoSize = true;
+            this.Radio_car.Checked = true;
+            this.Radio_car.Location = new System.Drawing.Point(64, 19);
+            this.Radio_car.Name = "Radio_car";
+            this.Radio_car.Size = new System.Drawing.Size(41, 17);
+            this.Radio_car.TabIndex = 1;
+            this.Radio_car.TabStop = true;
+            this.Radio_car.Text = "Car";
+            this.Radio_car.UseVisualStyleBackColor = true;
+            this.Radio_car.CheckedChanged += new System.EventHandler(this.Radio_car_CheckedChanged);
+            // 
+            // Radio_foot
+            // 
+            this.Radio_foot.AutoSize = true;
+            this.Radio_foot.Location = new System.Drawing.Point(12, 19);
+            this.Radio_foot.Name = "Radio_foot";
+            this.Radio_foot.Size = new System.Drawing.Size(46, 17);
+            this.Radio_foot.TabIndex = 0;
+            this.Radio_foot.Text = "Foot";
+            this.Radio_foot.UseVisualStyleBackColor = true;
+            this.Radio_foot.CheckedChanged += new System.EventHandler(this.Radio_foot_CheckedChanged);
             // 
             // iPsave1
             // 
@@ -239,16 +258,33 @@
             this.iPsave1.TabIndex = 20;
             this.iPsave1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.iPsave1_MouseClick);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(20, 184);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(235, 13);
+            this.label5.TabIndex = 31;
+            this.label5.Text = "Make data this much older than send time (secs)";
+            // 
+            // TB_howlongforstale
+            // 
+            this.TB_howlongforstale.Location = new System.Drawing.Point(23, 200);
+            this.TB_howlongforstale.Name = "TB_howlongforstale";
+            this.TB_howlongforstale.Size = new System.Drawing.Size(91, 20);
+            this.TB_howlongforstale.TabIndex = 30;
+            this.TB_howlongforstale.Text = "5";
+            this.TB_howlongforstale.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TB_howlongforstale_KeyUp);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 284);
+            this.ClientSize = new System.Drawing.Size(302, 353);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.TB_howlongforstale);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.iPsave1);
-            this.Controls.Add(this.staleData);
-            this.Controls.Add(this.rbUDP);
-            this.Controls.Add(this.rbTCP);
-            this.Controls.Add(this.CB_loop);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.TB_UID);
@@ -262,6 +298,8 @@
             this.Text = "COT Simulator";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,12 +322,15 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TB_UID;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox CB_loop;
-        private System.Windows.Forms.RadioButton rbTCP;
-        private System.Windows.Forms.RadioButton rbUDP;
-        private System.Windows.Forms.CheckBox staleData;
         private IPsave iPsave1;
         private System.Windows.Forms.ToolStripMenuItem ConfigToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton Radio_heli;
+        private System.Windows.Forms.RadioButton Radio_air;
+        private System.Windows.Forms.RadioButton Radio_car;
+        private System.Windows.Forms.RadioButton Radio_foot;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox TB_howlongforstale;
 
     }
 }

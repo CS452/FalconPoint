@@ -37,19 +37,19 @@ namespace FalconPoint4.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\PFPS\\falcon\\data\\icons\\Shape\\red turn.ico")]
-        public string DefaultIcon {
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\PFPS\\falcon\\data\\icons\\Shape\\")]
+        public string DefaultIconFolder {
             get {
-                return ((string)(this["DefaultIcon"]));
+                return ((string)(this["DefaultIconFolder"]));
             }
             set {
-                this["DefaultIcon"] = value;
+                this["DefaultIconFolder"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\PFPS\\falcon\\data\\icons\\Shape\\white turn.ico")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\PFPS\\falcon\\data\\icons\\Localpnt")]
         public string StaleIcon {
             get {
                 return ((string)(this["StaleIcon"]));
@@ -68,6 +68,18 @@ namespace FalconPoint4.Properties {
             }
             set {
                 this["DefaultLabel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int HowLongForStale {
+            get {
+                return ((int)(this["HowLongForStale"]));
+            }
+            set {
+                this["HowLongForStale"] = value;
             }
         }
     }

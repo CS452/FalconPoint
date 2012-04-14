@@ -35,11 +35,16 @@
             this.Port_TB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.IP_TB_config = new System.Windows.Forms.TextBox();
+            this.rbUDP = new System.Windows.Forms.RadioButton();
+            this.rbTCP = new System.Windows.Forms.RadioButton();
+            this.CB_loop = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ButtonCancel
             // 
-            this.ButtonCancel.Location = new System.Drawing.Point(127, 119);
+            this.ButtonCancel.Location = new System.Drawing.Point(127, 229);
             this.ButtonCancel.Name = "ButtonCancel";
             this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
             this.ButtonCancel.TabIndex = 25;
@@ -49,7 +54,7 @@
             // 
             // ButtonSave
             // 
-            this.ButtonSave.Location = new System.Drawing.Point(208, 119);
+            this.ButtonSave.Location = new System.Drawing.Point(208, 229);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(75, 23);
             this.ButtonSave.TabIndex = 24;
@@ -90,19 +95,68 @@
             this.IP_TB_config.Size = new System.Drawing.Size(246, 20);
             this.IP_TB_config.TabIndex = 26;
             // 
+            // rbUDP
+            // 
+            this.rbUDP.AutoSize = true;
+            this.rbUDP.Location = new System.Drawing.Point(80, 26);
+            this.rbUDP.Name = "rbUDP";
+            this.rbUDP.Size = new System.Drawing.Size(48, 17);
+            this.rbUDP.TabIndex = 31;
+            this.rbUDP.Text = "UDP";
+            this.rbUDP.UseVisualStyleBackColor = true;
+            // 
+            // rbTCP
+            // 
+            this.rbTCP.AutoSize = true;
+            this.rbTCP.Checked = true;
+            this.rbTCP.Location = new System.Drawing.Point(13, 26);
+            this.rbTCP.Name = "rbTCP";
+            this.rbTCP.Size = new System.Drawing.Size(61, 17);
+            this.rbTCP.TabIndex = 32;
+            this.rbTCP.TabStop = true;
+            this.rbTCP.Text = "TCP/IP";
+            this.rbTCP.UseVisualStyleBackColor = true;
+            // 
+            // CB_loop
+            // 
+            this.CB_loop.AutoSize = true;
+            this.CB_loop.Checked = true;
+            this.CB_loop.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CB_loop.Location = new System.Drawing.Point(12, 110);
+            this.CB_loop.Name = "CB_loop";
+            this.CB_loop.Size = new System.Drawing.Size(75, 17);
+            this.CB_loop.TabIndex = 30;
+            this.CB_loop.Text = "Loop File?";
+            this.CB_loop.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbUDP);
+            this.groupBox1.Controls.Add(this.rbTCP);
+            this.groupBox1.Location = new System.Drawing.Point(11, 136);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(218, 52);
+            this.groupBox1.TabIndex = 33;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Output Protocol";
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(295, 153);
+            this.ClientSize = new System.Drawing.Size(295, 265);
+            this.Controls.Add(this.CB_loop);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.IP_TB_config);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Port_TB);
+            this.Controls.Add(this.groupBox1);
             this.Name = "ConfigForm";
             this.Text = "Config";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,5 +171,9 @@
         private System.Windows.Forms.TextBox Port_TB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox IP_TB_config;
+        private System.Windows.Forms.RadioButton rbUDP;
+        private System.Windows.Forms.RadioButton rbTCP;
+        private System.Windows.Forms.CheckBox CB_loop;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

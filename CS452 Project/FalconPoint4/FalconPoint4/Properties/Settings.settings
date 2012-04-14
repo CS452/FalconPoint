@@ -5,14 +5,17 @@
     <Setting Name="Port" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3000</Value>
     </Setting>
-    <Setting Name="DefaultIcon" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files\PFPS\falcon\data\icons\Shape\red turn.ico</Value>
+    <Setting Name="DefaultIconFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\PFPS\falcon\data\icons\Shape\</Value>
     </Setting>
     <Setting Name="StaleIcon" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files\PFPS\falcon\data\icons\Shape\white turn.ico</Value>
+      <Value Profile="(Default)">C:\Program Files\PFPS\falcon\data\icons\Localpnt</Value>
     </Setting>
     <Setting Name="DefaultLabel" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="HowLongForStale" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30</Value>
     </Setting>
   </Settings>
 </SettingsFile>

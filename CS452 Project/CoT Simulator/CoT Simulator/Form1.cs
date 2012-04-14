@@ -30,7 +30,6 @@ namespace CoT_Simulator
             </event>
          */
 
-
         public Form1()
         {
             InitializeComponent();
@@ -57,6 +56,7 @@ namespace CoT_Simulator
 
             if (file != null)
             {
+                TrackOptionsED(false); // turn off track option radio buttons
                 BUT_StartTransmit.Text = "Transmit";
                 loaded_cot_flag = true;
 
@@ -65,7 +65,6 @@ namespace CoT_Simulator
 
                 try
                 {
-
                     using (StreamReader read_line = new StreamReader(file))
                     {
                         while ((current_line = read_line.ReadLine()) != null)
@@ -106,10 +105,10 @@ namespace CoT_Simulator
                 add_line_ToList();
             }
             else
-                MessageBox.Show("unknown line " + current_line.ToString());
+                ;// MessageBox.Show("unknown line " + current_line.ToString());
         }
 
-        // Changes stale time to current time, so that we appear to be sending stale data
+        // Updates stale time
         private string UpdateStaleTime(string _text)
         {
             string current_lineMod = _text;
@@ -117,14 +116,39 @@ namespace CoT_Simulator
 
             if(current_lineMod.Contains("stale=") == true && current_lineMod.Contains("time=") == true) // be sure that we are on a line that has a line called stale & time
             {
+                DateTime staleTime;
+                string tempJustTime = null;
+                int howlongforstale = 0;
+                try
+                {
+                    if (TB_howlongforstale.Text != null)
+                    {
+                        howlongforstale = Convert.ToInt32(TB_howlongforstale.Text);
+                    }
+                }
+                catch 
+                {
+                    MessageBox.Show("error - enter a number");
+                }
+
                 _time = current_lineMod.Remove(0, current_lineMod.IndexOf("time")); // remove everything to the left of time field
                 _time = _time.Remove(0, _time.IndexOf("\"")+1); // remove "time=" from string
                 _time = _time.Remove(_time.IndexOf("\"")); // remove everything after the quote at the end of time
+                
 
                 int wheresStale = current_lineMod.IndexOf("stale");
 
                 current_lineMod = current_lineMod.Remove(wheresStale + 6, 22); // remove stale time stamp
 
+                staleTime = Convert.ToDateTime(_time); // convert _time string to actual DateTime
+                staleTime = staleTime.AddSeconds(howlongforstale); // add how long for stale seconds to our new time
+                tempJustTime = staleTime.ToLongTimeString().ToString(); // assign tempJustTime our new time as a string
+                tempJustTime = tempJustTime.Remove(0, tempJustTime.IndexOf(':')+1); // remove everythign up to the :
+                tempJustTime = tempJustTime.Remove(tempJustTime.Length - 3, 3); // remove last 3 digit "07:16 PM" -> 07:16
+                _time = _time.Remove(_time.Length - 6, 6); // remove last 6 digits from _time "2012-01-29T00:07:01Z" -> "2012-01-29T00:"
+                _time += tempJustTime + "Z"; // add the two together to get "2012-01-29T00:07:15Z"
+
+                 // convert the updated time back to a string "2012-01-29T00:07:01Z"
                 _time = "\"" + _time + "\"";
 
                 current_lineMod = current_lineMod.Insert(wheresStale + 6, _time); // insert _time where stale used to be
@@ -154,7 +178,7 @@ namespace CoT_Simulator
 
         public void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (rbTCP.Checked)
+            if (CoT_Simulator.Properties.Settings.Default.OutputTCP == true)
             {
                 TCP();
             }
@@ -183,7 +207,7 @@ namespace CoT_Simulator
                 NetworkStream clientStream = client.GetStream();
 
                 ASCIIEncoding encoder = new ASCIIEncoding();
-                bool restart = CB_loop.Checked;
+                bool restart = CoT_Simulator.Properties.Settings.Default.LoopFile;
                 do
                 {
                   
@@ -191,7 +215,7 @@ namespace CoT_Simulator
                     {
                         string outputTxt = text;
 
-                        if (staleData.Checked == true) // this means that we need to change the stale data time to equal the current time, so that it appears to be stale
+                        //if (staleData.Checked == true) // this means that we need to change the stale data time to equal the current time, so that it appears to be stale
                            outputTxt = UpdateStaleTime(text);
 
                         byte[] buffer = encoder.GetBytes(outputTxt);
@@ -217,7 +241,7 @@ namespace CoT_Simulator
                  IPAddress serverAddr = IPAddress.Parse(TB_IP.Text);
                  IPEndPoint endPoint = new IPEndPoint(serverAddr, port);
 
-                 bool restart = CB_loop.Checked;
+                 bool restart = CoT_Simulator.Properties.Settings.Default.LoopFile;
                  do
                  {
                      foreach (string text in event_list)
@@ -243,8 +267,20 @@ namespace CoT_Simulator
 
         private void get_random_id()
         {
+
             string UID = string.Format("{0:d}", DateTime.Now.Millisecond);
-            TB_UID.Text = "G" + UID;
+            
+            if(Radio_air.Checked == true)
+                TB_UID.Text = "A" + UID;
+
+            if (Radio_car.Checked == true)
+                TB_UID.Text = "C" + UID;
+
+            if (Radio_foot.Checked == true)
+                TB_UID.Text = "F" + UID;
+
+            if (Radio_heli.Checked == true)
+                TB_UID.Text = "H" + UID;
         }
 
         private void assign_id()
@@ -266,7 +302,9 @@ namespace CoT_Simulator
             else if (backgroundWorker1.IsBusy == true)
                 backgroundWorker1.CancelAsync();
             else
+            {
                 backgroundWorker1.RunWorkerAsync();
+            }
         }
 
         private void iPsave1_MouseClick(object sender, MouseEventArgs e)
@@ -280,6 +318,47 @@ namespace CoT_Simulator
             ConfigForm config = new ConfigForm();
             config.Show();
         }
+
+        private void Radio_foot_CheckedChanged(object sender, EventArgs e)
+        {
+            get_random_id();
+        }
+
+        private void Radio_car_CheckedChanged(object sender, EventArgs e)
+        {
+            get_random_id();
+        }
+
+        private void Radio_air_CheckedChanged(object sender, EventArgs e)
+        {
+            get_random_id();
+        }
+
+        private void Radio_heli_CheckedChanged(object sender, EventArgs e)
+        {
+            get_random_id();
+        }
+
+        private void TrackOptionsED(bool _value)
+        {
+
+                Radio_air.Enabled = _value;
+                Radio_car.Enabled = _value;
+                Radio_foot.Enabled = _value;
+                Radio_heli.Enabled = _value;
+
+        }
+
+
+        private void TB_howlongforstale_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.Equals(Keys.Enter))
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+
 
     }
 }

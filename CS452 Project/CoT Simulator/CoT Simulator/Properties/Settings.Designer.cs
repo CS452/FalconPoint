@@ -82,5 +82,53 @@ namespace CoT_Simulator.Properties {
                 this["LastFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int HowLongForStale {
+            get {
+                return ((int)(this["HowLongForStale"]));
+            }
+            set {
+                this["HowLongForStale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool OutputTCP {
+            get {
+                return ((bool)(this["OutputTCP"]));
+            }
+            set {
+                this["OutputTCP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OutputUDP {
+            get {
+                return ((bool)(this["OutputUDP"]));
+            }
+            set {
+                this["OutputUDP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LoopFile {
+            get {
+                return ((bool)(this["LoopFile"]));
+            }
+            set {
+                this["LoopFile"] = value;
+            }
+        }
     }
 }

@@ -13,6 +13,10 @@ namespace FalconPoint4
         string iconLoc = null;
         Logistics logistics = new Logistics();
         public int YtextOffset = -40;
+        private const string FOOTicon = "GndFoot.ICO";
+        private const string CARicon = "GndMotor.ICO";
+        private const string HELIicon = "Helicopter.ICO";
+        private const string PLANEicon = "Kc-135.ico";
 
         public FPdrawer()
         {
@@ -21,17 +25,15 @@ namespace FalconPoint4
 
         public void InitConfigFile()
         {
-            if (FalconPoint4.Properties.Settings.Default.DefaultIcon == null)
+            if (FalconPoint4.Properties.Settings.Default.DefaultIconFolder == null)
             {
                 if (System.Environment.Is64BitOperatingSystem)
                 {
-                    FalconPoint4.Properties.Settings.Default.DefaultIcon = "C:\\Program Files (x86)\\PFPS\\falcon\\data\\icons\\Shape\\red turn.ico";
-                    FalconPoint4.Properties.Settings.Default.StaleIcon = "C:\\Program Files (x86)\\PFPS\\falcon\\data\\icons\\Shape\\white turn.ico";
+                    FalconPoint4.Properties.Settings.Default.DefaultIconFolder = "C:\\Program Files (x86)\\PFPS\\falcon\\data\\icons\\Localpnt";
                 }
                 else
                 {
-                    FalconPoint4.Properties.Settings.Default.DefaultIcon = "C:\\Program Files\\PFPS\\falcon\\data\\icons\\Shape\\red turn.ico";
-                    FalconPoint4.Properties.Settings.Default.StaleIcon = "C:\\Program Files\\PFPS\\falcon\\data\\icons\\Shape\\white turn.ico";
+                    FalconPoint4.Properties.Settings.Default.DefaultIconFolder = "C:\\Program Files\\PFPS\\falcon\\data\\icons\\Localpnt";
                 }
 
                 FalconPoint4.Properties.Settings.Default.Save();
@@ -42,10 +44,12 @@ namespace FalconPoint4
         //Austen: changed input params to pass entire layer list so that we'd have access to all it's values
         public void CreatePoint(ILayer FP_point, int layer, LayerList layerList, string id, double lat, double lon, DateTime time, bool isStale)
         {
-            if (isStale == false)
-                iconLoc = FalconPoint4.Properties.Settings.Default.DefaultIcon;
-            else
-                iconLoc = FalconPoint4.Properties.Settings.Default.StaleIcon;
+            iconLoc = FalconPoint4.Properties.Settings.Default.DefaultIconFolder + WhichIcon(id);
+
+            if (isStale == true) // data is stale - id += " - STALE";
+                FP_point.SetPen(layer, 0, 0, 0, 0, 0, 0, 1, 3, 0);
+            else // data is not stale
+                FP_point.SetPen(layer, 50, 205, 50, 0, 0, 0, 0, 3, 0);
 
             try
             {
@@ -61,31 +65,37 @@ namespace FalconPoint4
 
                     double heading = logistics.Heading(lat, lon, lat1, lon1); // Compute heading
                     double speed = logistics.SpeedMPH(lat, lon, lat1, lon1, time, time1); // Compute Speed
-                    RenderArrow(FP_point, layerList, lat, lon, time, heading);
 
-                    //{MPH = 0, Bearing = 1, None = 2, Both = 3};
-                    if (FPmain.DisplayChoice == 0) // if we want to see just mph
-                    {
-                        AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 15);
-                        AddSpeedText(FP_point, layerList, lat, lon, speed, heading, YtextOffset);
-                    }
 
-                    if (FPmain.DisplayChoice == 1) // if we want to see just bearing
+                    if (layerList.showArrow != false)
                     {
-                        AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 15);
-                        AddHeadingText(FP_point, layerList, lat, lon, heading, YtextOffset);
-                    }
+                        RenderArrow(FP_point, layerList, lat, lon, time, heading);
 
-                    if (FPmain.DisplayChoice == 2) // if we want to see just id
-                    {
-                        AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset);
-                    }
 
-                    if (FPmain.DisplayChoice == 3) // if we want to see just all
-                    {
-                        AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 30);
-                        AddSpeedText(FP_point, layerList, lat, lon, speed, heading, YtextOffset - 15);
-                        AddHeadingText(FP_point, layerList, lat, lon, heading, YtextOffset);
+                        //{MPH = 0, Bearing = 1, None = 2, Both = 3};
+                        if (FPmain.DisplayChoice == 0) // if we want to see just mph
+                        {
+                            AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 15);
+                            AddSpeedText(FP_point, layerList, lat, lon, speed, heading, YtextOffset);
+                        }
+
+                        if (FPmain.DisplayChoice == 1) // if we want to see just bearing
+                        {
+                            AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 15);
+                            AddHeadingText(FP_point, layerList, lat, lon, heading, YtextOffset);
+                        }
+
+                        if (FPmain.DisplayChoice == 2) // if we want to see just id
+                        {
+                            AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset);
+                        }
+
+                        if (FPmain.DisplayChoice == 3) // if we want to see just all
+                        {
+                            AddUIDText(FP_point, layerList, lat, lon, heading, id, YtextOffset - 30);
+                            AddSpeedText(FP_point, layerList, lat, lon, speed, heading, YtextOffset - 15);
+                            AddHeadingText(FP_point, layerList, lat, lon, heading, YtextOffset);
+                        }
                     }
                 }
 
@@ -110,7 +120,6 @@ namespace FalconPoint4
 
             //add created symbol to layer with lat long and rotation
             FP_point.AddSymbol(layerList.Layer, symbolHandle, lat, lon, 20, heading);                                                    
-
         }
 
         public void AddUIDText(ILayer FP_point, LayerList layerList, double lat, double lon, double heading, string id, int YtextOffset)
@@ -134,6 +143,22 @@ namespace FalconPoint4
                 return -60;
 
             return -13;
+        }
+
+        public string WhichIcon(string _id)
+        {
+            char fistLetter = Convert.ToChar((_id.Remove(1, _id.Length - 1)));
+
+            if (fistLetter == 'F')
+                return FOOTicon;
+            if (fistLetter == 'C')
+                return CARicon;
+            if (fistLetter == 'A')
+                return PLANEicon;
+            if (fistLetter == 'H')
+                return HELIicon;
+
+            return null;
         }
 
 
