@@ -70,3 +70,13 @@ C:\Workspace 2\CS452\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\CoT
 C:\Workspace 2\CS452\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Workspace 2\CS452\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Workspace 2\CS452\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\CoT_Simulator.IPsave.resources
+C:\Athens\CS452 Project\CoT Simulator\CoT Simulator\bin\Debug\CoT Simulator.exe.config
+C:\Athens\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\CoT Simulator.exe
+C:\Athens\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\CoT Simulator.pdb
+C:\Athens\CS452 Project\CoT Simulator\CoT Simulator\bin\Debug\CoT Simulator.exe
+C:\Athens\CS452 Project\CoT Simulator\CoT Simulator\bin\Debug\CoT Simulator.pdb
+C:\Athens\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\CoT_Simulator.ConfigForm.resources
+C:\Athens\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\CoT_Simulator.Form1.resources
+C:\Athens\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\CoT_Simulator.IPsave.resources
+C:\Athens\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\CoT_Simulator.Properties.Resources.resources
+C:\Athens\CS452 Project\CoT Simulator\CoT Simulator\obj\x86\Debug\CoT Simulator.csproj.GenerateResource.Cache

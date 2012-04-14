@@ -282,10 +282,10 @@ namespace FalconPoint4
             string rightClickConfig = "FalconPoint Config\nConfig";
 
             // The first time Falconview calls FPmain, it creates a default layer at handle 100.  We only want to get capture the right click at that layer.
-            if (layer_handle == 101) // first layer created... this is before any icons are added
+            if (layer_handle == 100) // first layer created... this is before any icons are added
                 menu_text = rightClickConfig;
 
-            if (layer_handle == 102) // second layer created... after one item is added
+            if (layer_handle == 101) // second layer created... after one item is added
                 menu_text = rightClickDisplay[DisplayChoice];
 
         }
