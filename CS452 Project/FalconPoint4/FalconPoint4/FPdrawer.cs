@@ -117,9 +117,9 @@ namespace FalconPoint4
             int symbolHandle = FP_point.CreateSymbol("arrow", 0);  //Create symbol 0 = doesn't already exist
 
             //add line to symbol from pixel 0,0 to 0,1 (use this to change where degree 0 is)
-            FP_point.AddLineToSymbol(symbolHandle, 0, 0, 0, 2);
-            FP_point.AddLineToSymbol(symbolHandle, 0, 2, 1, 1);
-            FP_point.AddLineToSymbol(symbolHandle, 0, 2, -1, 1);
+            FP_point.AddLineToSymbol(symbolHandle, 0, -2, 0, 0);
+            FP_point.AddLineToSymbol(symbolHandle, 0, -2, 1, -1);
+            FP_point.AddLineToSymbol(symbolHandle, 0, -2, -1, -1);
 
             //add created symbol to layer with lat long and rotation
             FP_point.AddSymbol(layerList.Layer, symbolHandle, lat, lon, 20, heading);                                                    

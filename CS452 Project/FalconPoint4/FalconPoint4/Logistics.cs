@@ -39,7 +39,7 @@ namespace FalconPoint4
         public double ToHeading(double radians)
         {
             // convert radians to degrees (as heading: 0...360)
-            return (rad2deg(radians) + 360) % 360;
+            return ((rad2deg(radians) + 360)-180) % 360;
         }
 
             public double Distance (double lat1, double lat2, double lon1, double lon2)
