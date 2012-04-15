@@ -13,10 +13,10 @@ namespace FalconPoint4
         string iconLoc = null;
         Logistics logistics = new Logistics();
         public int YtextOffset = -40;
-        private const string FOOTicon = "GndFoot.ICO";
-        private const string CARicon = "GndMotor.ICO";
-        private const string HELIicon = "Helicopter.ICO";
-        private const string PLANEicon = "Kc-135.ico";
+        private const string FOOTicon = "FOOT.ICO";
+        private const string CARicon = "CAR.ICO";
+        private const string HELIicon = "HELI.ICO";
+        private const string PLANEicon = "Plane.ico";
 
         public FPdrawer()
         {
