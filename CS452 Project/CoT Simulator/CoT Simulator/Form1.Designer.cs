@@ -50,11 +50,22 @@
             this.Radio_air = new System.Windows.Forms.RadioButton();
             this.Radio_car = new System.Windows.Forms.RadioButton();
             this.Radio_foot = new System.Windows.Forms.RadioButton();
-            this.iPsave1 = new CoT_Simulator.IPsave();
             this.label5 = new System.Windows.Forms.Label();
             this.TB_howlongforstale = new System.Windows.Forms.TextBox();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.iPsave1 = new CoT_Simulator.IPsave();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -152,7 +163,7 @@
             // BUT_StartTransmit
             // 
             this.BUT_StartTransmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BUT_StartTransmit.Location = new System.Drawing.Point(21, 251);
+            this.BUT_StartTransmit.Location = new System.Drawing.Point(23, 251);
             this.BUT_StartTransmit.Name = "BUT_StartTransmit";
             this.BUT_StartTransmit.Size = new System.Drawing.Size(263, 77);
             this.BUT_StartTransmit.TabIndex = 9;
@@ -246,18 +257,6 @@
             this.Radio_foot.UseVisualStyleBackColor = true;
             this.Radio_foot.CheckedChanged += new System.EventHandler(this.Radio_foot_CheckedChanged);
             // 
-            // iPsave1
-            // 
-            this.iPsave1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("iPsave1.BackgroundImage")));
-            this.iPsave1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.iPsave1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iPsave1.Location = new System.Drawing.Point(171, 46);
-            this.iPsave1.Margin = new System.Windows.Forms.Padding(0);
-            this.iPsave1.Name = "iPsave1";
-            this.iPsave1.Size = new System.Drawing.Size(27, 30);
-            this.iPsave1.TabIndex = 20;
-            this.iPsave1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.iPsave1_MouseClick);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -276,11 +275,123 @@
             this.TB_howlongforstale.Text = "5";
             this.TB_howlongforstale.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TB_howlongforstale_KeyUp);
             // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(28, 348);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(251, 45);
+            this.trackBar1.TabIndex = 32;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(24, 380);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(21, 13);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "0%";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(254, 380);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 13);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "100%";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(136, 380);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(27, 13);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "50%";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 396);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(44, 13);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "(no time";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(1, 409);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(76, 13);
+            this.label10.TabIndex = 37;
+            this.label10.Text = "accounted for)";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(126, 396);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(42, 13);
+            this.label11.TabIndex = 38;
+            this.label11.Text = "(double";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(136, 409);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(29, 13);
+            this.label12.TabIndex = 39;
+            this.label12.Text = "time)";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(253, 396);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(27, 13);
+            this.label13.TabIndex = 40;
+            this.label13.Text = "(real";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(258, 409);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 13);
+            this.label14.TabIndex = 41;
+            this.label14.Text = "time)";
+            // 
+            // iPsave1
+            // 
+            this.iPsave1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("iPsave1.BackgroundImage")));
+            this.iPsave1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.iPsave1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iPsave1.Location = new System.Drawing.Point(171, 46);
+            this.iPsave1.Margin = new System.Windows.Forms.Padding(0);
+            this.iPsave1.Name = "iPsave1";
+            this.iPsave1.Size = new System.Drawing.Size(27, 30);
+            this.iPsave1.TabIndex = 20;
+            this.iPsave1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.iPsave1_MouseClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 353);
+            this.ClientSize = new System.Drawing.Size(302, 428);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.TB_howlongforstale);
             this.Controls.Add(this.groupBox1);
@@ -300,6 +411,7 @@
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,6 +443,16 @@
         private System.Windows.Forms.RadioButton Radio_foot;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox TB_howlongforstale;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
 
     }
 }

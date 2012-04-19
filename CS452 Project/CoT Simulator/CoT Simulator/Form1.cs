@@ -22,6 +22,7 @@ namespace CoT_Simulator
         private int sleep_length = 1000;
         private bool loaded_cot_flag = false;
         private int timeOut = 1000;
+        private int outPutSpeed = 0;
 
         /* SAMPLE COTS INPUT
             <event version="2.0" uid="****" how="m-r" time="2012-01-29T00:07:06Z" stale="2012-01-29T00:47:06Z" type="a-f-G" start="2012-01-29T00:07:06Z">
@@ -158,6 +159,22 @@ namespace CoT_Simulator
 
         }
 
+        private DateTime PulloutTime(string _text)
+        {
+            string current_lineMod = _text;
+            string _time = null;
+            DateTime _DTtime;
+
+            _time = current_lineMod.Remove(0, current_lineMod.IndexOf("time")); // remove everything to the left of time field
+            _time = _time.Remove(0, _time.IndexOf("\"") + 1); // remove "time=" from string
+            _time = _time.Remove(_time.IndexOf("\"")); // remove everything after the quote at the end of time
+
+            _DTtime = Convert.ToDateTime(_time); // convert _time string to actual DateTime
+
+            return _DTtime;
+        }
+
+
         private void combine_line()
         {
             one_event_line = one_event_line + current_line;
@@ -193,6 +210,10 @@ namespace CoT_Simulator
         private void TCP()
         {
             int port = Convert.ToInt32(TB_port.Text);
+            string outputTxt;
+            DateTime time = PulloutTime(event_list[0]);
+            DateTime lastTime = PulloutTime(event_list[0]);
+
             IPAddress serverAddr = IPAddress.Parse(TB_IP.Text);
 
             TcpClient client = new TcpClient();
@@ -210,17 +231,23 @@ namespace CoT_Simulator
                 bool restart = CoT_Simulator.Properties.Settings.Default.LoopFile;
                 do
                 {
-                  
+
                     foreach (string text in event_list)
                     {
-                        string outputTxt = text;
+                        outputTxt = text;
+                        time = PulloutTime(outputTxt);
+                        
 
-                        //if (staleData.Checked == true) // this means that we need to change the stale data time to equal the current time, so that it appears to be stale
-                           outputTxt = UpdateStaleTime(text);
+                        outputTxt = UpdateStaleTime(text);
 
                         byte[] buffer = encoder.GetBytes(outputTxt);
                         clientStream.Write(buffer, 0, buffer.Length);
                         System.Threading.Thread.Sleep(sleep_length);
+
+                        SleepRealTime(time, lastTime);
+
+                        lastTime = time;
+
                     }
 
                 } while (restart == true);
@@ -229,6 +256,14 @@ namespace CoT_Simulator
             {
                 MessageBox.Show("Server error... be sure that FalconPoint is running on destination computer.");
             }
+        }
+
+        private void SleepRealTime(DateTime time1, DateTime time2)
+        {
+            TimeSpan span = time1.Subtract(time2);
+
+            System.Threading.Thread.Sleep((int)(span.TotalSeconds * (outPutSpeed*10)));
+
         }
 
         private void UDP()
@@ -356,6 +391,11 @@ namespace CoT_Simulator
             {
                 SendKeys.Send("{TAB}");
             }
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            outPutSpeed = trackBar1.Value;
         }
 
 

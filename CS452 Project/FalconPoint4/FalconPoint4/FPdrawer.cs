@@ -142,7 +142,7 @@ namespace FalconPoint4
 
         public int XtextOffset(double heading)
         {
-            if (heading > 140 && heading < 220)
+            if (heading > 290 || heading < 70)
                 return -60;
 
             return -13;
